@@ -8,26 +8,26 @@ import (
 )
 
 var lsCmd = &cobra.Command{
-	Use:"ls",
-	Short:"Lists all files in the current directory",
-	Long : "using the io/ioutil package, we list all files found in our current directory",
-	Run: ls,
+	Use:   "ls",
+	Short: "Lists all files in the current directory",
+	Long:  "using the io/ioutil package, we list all files found in our current directory",
+	Run:   ls,
 }
 
-func ls(cmd *cobra.Command, args []string){
+func ls(cmd *cobra.Command, args []string) {
 	files, err := os.ReadDir("./")
-    if err != nil {
+	if err != nil {
 		panic(err)
-    }
+	}
 
-    for _, file := range files {
-		if file.IsDir(){
+	for _, file := range files {
+		if file.IsDir() {
 			fmt.Print("Directory: ")
 		}
-        fmt.Println(file.Name())
-    }
+		fmt.Println(file.Name())
+	}
 }
 
-func init(){
-	rootCmd.AddCommand(lsCmd)
+func init() {
+	RootCmd.AddCommand(lsCmd)
 }

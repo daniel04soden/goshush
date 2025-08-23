@@ -8,21 +8,21 @@ import (
 )
 
 var pwdCmd = &cobra.Command{
-	Use:"pwd",
-	Short:"Prints current directory",
-	Long : "Using the os package, we display the current directory to stdout",
-	Run: pwd,
+	Use:   "pwd",
+	Short: "Prints current directory",
+	Long:  "Using the os package, we display the current directory to stdout",
+	Run:   pwd,
 }
 
-func pwd(cmd *cobra.Command, args []string){
-	currentDir,err := os.Getwd()
-	if err!=nil{
+func pwd(cmd *cobra.Command, args []string) {
+	currentDir, err := os.Getwd()
+	if err != nil {
 		print(err)
-	}else{
+	} else {
 		fmt.Println(currentDir)
 	}
 }
 
-func init(){
-	rootCmd.AddCommand(pwdCmd)
+func init() {
+	RootCmd.AddCommand(pwdCmd)
 }

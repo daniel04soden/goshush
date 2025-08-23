@@ -4,17 +4,17 @@ import (
 	"fmt"
 	"time"
 
-	"github.com/spf13/cobra"
-    "github.com/shirou/gopsutil/v4/mem"
-    "github.com/shirou/gopsutil/v4/disk"
 	"github.com/shirou/gopsutil/v4/cpu"
+	"github.com/shirou/gopsutil/v4/disk"
 	"github.com/shirou/gopsutil/v4/host"
+	"github.com/shirou/gopsutil/v4/mem"
+	"github.com/spf13/cobra"
 )
 
 var fetchCmd = &cobra.Command{
-	Use:"fetch",
-	Short:"Prints user system info",
-	Long : `Using the gopsutil library, this command fetches any needed user info
+	Use:   "fetch",
+	Short: "Prints user system info",
+	Long: `Using the gopsutil library, this command fetches any needed user info
 	. It includes a variety of flags to specify this info/format it`,
 	Run: fetch,
 }
@@ -34,6 +34,7 @@ func formatBytes(bytes uint64) string {
 
 	return fmt.Sprintf("%.1f %cB", float64(bytes)/float64(div), "KMGTPE"[exp])
 }
+
 func formatDuration(d time.Duration) string {
 	d = d.Round(time.Second)
 	h := d / time.Hour
@@ -44,7 +45,7 @@ func formatDuration(d time.Duration) string {
 	return fmt.Sprintf("%02d:%02d:%02d", h, m, s)
 }
 
-func fetch(cmd *cobra.Command, args []string){
+func fetch(cmd *cobra.Command, args []string) {
 	var art string = `
                                                                                 
                                  */,****,****,*, ..                             
@@ -68,18 +69,15 @@ func fetch(cmd *cobra.Command, args []string){
 	info()
 }
 
-func init(){
-	rootCmd.AddCommand(fetchCmd)
+func init() {
+	RootCmd.AddCommand(fetchCmd)
 }
 
-
-
 func info() {
-    vmStat, _ := mem.VirtualMemory()
-	diskUsage,_:= disk.Usage("/")
-	hostInfo,_ := host.Info()
-	cpuInfo,_ := cpu.Info()
-
+	vmStat, _ := mem.VirtualMemory()
+	diskUsage, _ := disk.Usage("/")
+	hostInfo, _ := host.Info()
+	cpuInfo, _ := cpu.Info()
 
 	fmt.Println("--- Host Information ---")
 	fmt.Printf("OS: %s\n", hostInfo.OS)
@@ -100,12 +98,11 @@ func info() {
 	fmt.Println()
 }
 
-func verbose(){
-    vmStat, _ := mem.VirtualMemory()
-	diskUsage,_:= disk.Usage("/")
-	hostInfo,_ := host.Info()
-	cpuInfo,_ := cpu.Info()
-
+func verbose() {
+	vmStat, _ := mem.VirtualMemory()
+	diskUsage, _ := disk.Usage("/")
+	hostInfo, _ := host.Info()
+	cpuInfo, _ := cpu.Info()
 
 	fmt.Println("--- Host Information ---")
 	fmt.Printf("Hostname: %s\n", hostInfo.Hostname)
