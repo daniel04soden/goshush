@@ -97,36 +97,3 @@ func info() {
 	fmt.Printf("Free: %s\n", formatBytes(diskUsage.Free))
 	fmt.Println()
 }
-
-func verbose() {
-	vmStat, _ := mem.VirtualMemory()
-	diskUsage, _ := disk.Usage("/")
-	hostInfo, _ := host.Info()
-	cpuInfo, _ := cpu.Info()
-
-	fmt.Println("--- Host Information ---")
-	fmt.Printf("Hostname: %s\n", hostInfo.Hostname)
-	fmt.Printf("OS: %s\n", hostInfo.OS)
-	fmt.Printf("Kernel Version: %s\n", hostInfo.KernelVersion)
-	fmt.Printf("Uptime: %s\n", formatDuration(time.Duration(hostInfo.Uptime)*time.Second))
-	fmt.Printf("Boot Time: %s\n", time.Unix(int64(hostInfo.BootTime), 0).Format(time.RFC1123))
-	fmt.Println()
-
-	fmt.Println("--- CPU Information ---")
-	fmt.Printf("Logical Cores: %d\n", len(cpuInfo))
-	fmt.Printf("Model Name: %s\n", cpuInfo[0].ModelName) // Note: This assumes cpuInfo is not empty
-
-	fmt.Println("--- Memory Information ---")
-	fmt.Printf("Total: %s\n", formatBytes(vmStat.Total))
-	fmt.Printf("Available: %s\n", formatBytes(vmStat.Available))
-	fmt.Printf("Used: %s\n", formatBytes(vmStat.Used))
-	fmt.Printf("Used Percent: %.2f%%\n", vmStat.UsedPercent)
-	fmt.Println()
-
-	fmt.Println("--- Disk Information (/) ---")
-	fmt.Printf("Total: %s\n", formatBytes(diskUsage.Total))
-	fmt.Printf("Free: %s\n", formatBytes(diskUsage.Free))
-	fmt.Printf("Used: %s\n", formatBytes(diskUsage.Used))
-	fmt.Printf("Used Percent: %.2f%%\n", diskUsage.UsedPercent)
-	fmt.Println()
-}

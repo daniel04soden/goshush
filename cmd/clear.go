@@ -10,8 +10,8 @@ import (
 
 var clearCmd = &cobra.Command{
 	Use:   "clear",
-	Short: "Lists all files in the current directory",
-	Long:  "using the io/ioutil package, we list all files found in our current directory",
+	Short: "Clears the terminal screen",
+	Long:  "Depending on the OS being used, it either clears the screen using a fmt ascii code or uses the screen package by spf13",
 	Run:   clear,
 }
 
