@@ -2,9 +2,16 @@ package cmd
 
 import (
 	"fmt"
+	"log"
 	"os"
+	"strings"
 
 	"github.com/spf13/cobra"
+)
+
+var (
+	long   bool
+	hidden bool
 )
 
 var lsCmd = &cobra.Command{
@@ -21,13 +28,33 @@ func ls(cmd *cobra.Command, args []string) {
 	}
 
 	for _, file := range files {
-		if file.IsDir() {
-			fmt.Print("Directory: ")
+		if !hidden && strings.HasPrefix(file.Name(), ".") {
+			continue
+		} else {
+			if long {
+				info, err := file.Info()
+				if err != nil {
+					log.Fatal(err)
+					continue
+				}
+				if file.IsDir() {
+					fmt.Printf("📁 %s\t%d b \t%s\n", info.Mode(), info.Size(), file.Name())
+				} else {
+					fmt.Printf("%s\t%d b \t%s\n", info.Mode(), info.Size(), file.Name())
+				}
+			} else {
+				if file.IsDir() {
+					fmt.Println("📁", file.Name())
+				} else {
+					fmt.Println(file.Name())
+				}
+			}
 		}
-		fmt.Println(file.Name())
 	}
 }
 
 func init() {
+	lsCmd.Flags().BoolVarP(&long, "long", "l", false, "Shows more info on list")
+	lsCmd.Flags().BoolVarP(&hidden, "all", "a", false, "Includes hidden files")
 	RootCmd.AddCommand(lsCmd)
 }
