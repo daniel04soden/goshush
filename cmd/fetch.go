@@ -86,7 +86,7 @@ func info() {
 	fmt.Println()
 
 	fmt.Println("--- CPU Information ---")
-	fmt.Printf("Model Name: %s\n", cpuInfo[0].ModelName) // Note: This assumes cpuInfo is not empty
+	fmt.Printf("Model Name: %s\n", cpuInfo[0].ModelName)
 
 	fmt.Println("--- Memory Information ---")
 	fmt.Printf("Total: %s\n", formatBytes(vmStat.Total))
