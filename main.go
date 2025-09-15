@@ -13,6 +13,9 @@ import (
 )
 
 func main() {
+	var constantRunning bool = false
+	//TODO Fix inconsistencies with repeated flag commands like ls and ps
+	if constantRunning{
 	scanner := bufio.NewScanner(os.Stdin)
 	for {
 
@@ -31,5 +34,8 @@ func main() {
 		cmd.RootCmd.SetArgs(args)
 		cmd.RootCmd.Execute()
 
+		//TODO fix issues with cd where directory isn't fully changed - works in constant running
+	}}else{
+		cmd.RootCmd.Execute()
 	}
 }
