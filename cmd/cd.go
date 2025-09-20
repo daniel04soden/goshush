@@ -1,6 +1,7 @@
 package cmd
 
 import (
+	"fmt"
 	"log"
 	"os"
 	"strings"
@@ -21,6 +22,8 @@ func cd(cmd *cobra.Command, args []string) {
 	if err != nil {
 		log.Fatal(err)
 	}
+	cwd,_ := os.Getwd()
+	fmt.Println("Changing to directory: ",cwd)
 }
 
 func init() {
