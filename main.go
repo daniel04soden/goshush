@@ -13,7 +13,7 @@ import (
 )
 
 func main() {
-	var constantRunning bool = false
+	var constantRunning bool = true
 	//TODO Fix inconsistencies with repeated flag commands like ls and ps
 	if constantRunning{
 	scanner := bufio.NewScanner(os.Stdin)
