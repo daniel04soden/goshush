@@ -25,10 +25,14 @@ func grepFile(fileName string, pattern string) string {
 	}
 
 	defer file.Close()
+	line := 1 // starting at line 1
 	scanner := bufio.NewScanner(file)
 	for scanner.Scan() {
+		line++
 		if strings.Contains(scanner.Text(), pattern) {
 			content = scanner.Text()
+			fmt.Println("Line: ",line)
+			return content
 		}
 	}
 	if err := scanner.Err(); err != nil {
